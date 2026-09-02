@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  core-tests:
+    name: ATLASCore (SwiftPM)
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Show Swift version
+        run: swift --version
+
+      - name: Build ATLASCore
+        run: swift build
+
+      - name: Run domain tests
+        run: swift test
