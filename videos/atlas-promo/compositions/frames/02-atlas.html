@@ -1,0 +1,274 @@
+<template>
+  <style>
+    #root {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      container-type: size;
+      color: #FFFFFF;
+    }
+
+    [id="f02-atlas-ground"] {
+      position: absolute;
+      inset: 0;
+      background: #000000;
+      overflow: hidden;
+    }
+
+    [id="f02-atlas-stage"] {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    [id="f02-atlas-blue-square"] {
+      position: absolute;
+      z-index: 1;
+      left: 27.4cqw;
+      top: 9.8cqh;
+      width: 14.2cqw;
+      height: 14.2cqw;
+      background: #5265FF;
+      transform-origin: 0% 50%;
+      will-change: transform, opacity;
+    }
+
+    [id="f02-atlas-word"] {
+      position: absolute;
+      z-index: 2;
+      left: 5.5cqw;
+      top: 7.3cqh;
+      width: 52cqw;
+      min-height: 26cqh;
+      margin: 0;
+      font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 14cqw;
+      font-weight: 900;
+      line-height: 0.88;
+      letter-spacing: -0.04em;
+      text-transform: lowercase;
+      white-space: nowrap;
+      color: #FFFFFF;
+      will-change: transform, opacity;
+    }
+
+    [id="f02-atlas-phone"] {
+      position: absolute;
+      z-index: 4;
+      right: 11.5cqw;
+      top: 16.5cqh;
+      width: 15.2cqw;
+      height: 61cqh;
+      margin: 0;
+      border: 1px solid #262628;
+      background: #000000;
+      overflow: hidden;
+      transform-origin: 50% 100%;
+      will-change: transform, opacity;
+    }
+
+    [id="f02-atlas-phone"]::before {
+      content: "";
+      position: absolute;
+      z-index: 2;
+      inset: 0;
+      border-left: 2px solid #5265FF;
+      pointer-events: none;
+    }
+
+    [id="f02-atlas-screen"] {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: 50% 50%;
+    }
+
+    [id="f02-atlas-promise"] {
+      position: absolute;
+      z-index: 3;
+      left: 5.5cqw;
+      top: 42cqh;
+      width: 43cqw;
+      min-height: 30cqh;
+      font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 3.2cqw;
+      font-weight: 700;
+      line-height: 1.18;
+      letter-spacing: -0.02em;
+      text-transform: lowercase;
+      color: #FFFFFF;
+    }
+
+    [id="f02-atlas-promise"] [class~="02-atlas-line"] {
+      display: block;
+      white-space: nowrap;
+    }
+
+    [id="f02-atlas-promise"] [class~="02-atlas-dot"] {
+      color: #5265FF;
+    }
+
+    [id="f02-atlas-footer"] {
+      position: absolute;
+      z-index: 5;
+      left: 5.5cqw;
+      top: 78cqh;
+      display: flex;
+      align-items: center;
+      gap: 1.4cqw;
+      height: 4cqh;
+      will-change: transform, opacity;
+    }
+
+    [id="f02-atlas-rule"] {
+      width: 7.3cqw;
+      height: 2px;
+      background: #5265FF;
+      transform-origin: 0% 50%;
+      will-change: transform;
+    }
+
+    [id="f02-atlas-label"] {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.82cqw;
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      white-space: nowrap;
+    }
+  </style>
+
+  <div data-hf-id="hf-vhmp" id="root" data-composition-id="02-atlas" data-width="1920" data-height="1080" data-duration="7.5">
+    <div data-hf-id="hf-xedy" id="f02-atlas-ground" class="clip" data-start="0" data-duration="7.5" data-track-index="0"></div>
+
+    <div data-hf-id="hf-x3b4" id="f02-atlas-stage" class="clip" data-start="0" data-duration="7.5" data-track-index="1">
+      <div data-hf-id="hf-xbaz" id="f02-atlas-blue-square" aria-hidden="true"></div>
+      <div data-hf-id="hf-2oje" id="f02-atlas-word" aria-label="atlas"></div>
+
+      <div data-hf-id="hf-qlbu" id="f02-atlas-promise" aria-label="native. locale. sans compte."></div>
+
+      <figure data-hf-id="hf-r8qz" id="f02-atlas-phone" aria-label="Écran Aujourd’hui de l’application ATLAS">
+        <img data-hf-id="hf-rluk" id="f02-atlas-screen" src="assets/atlas-today.png" alt="Écran Aujourd’hui ATLAS">
+      </figure>
+
+      <div data-hf-id="hf-9ijz" id="f02-atlas-footer">
+        <div data-hf-id="hf-2acb" id="f02-atlas-rule" aria-hidden="true"></div>
+        <div data-hf-id="hf-mfn8" id="f02-atlas-label">IPHONE · LOCAL-FIRST</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+
+      const titleEl = document.getElementById("f02-atlas-word");
+      const titleContent = [
+        { word: "", hold: 0.1 },
+        { word: "atlas", hold: 1.2 },
+      ];
+      let titleClock = 0;
+      const titleTimeline = titleContent.map((entry) => {
+        const duration = 0.6 + entry.word.length * 0.04 + entry.hold;
+        const start = titleClock;
+        titleClock += duration;
+        return { ...entry, start, end: titleClock };
+      });
+      const titleStateAt = (time) => {
+        for (let i = titleTimeline.length - 1; i >= 0; i -= 1) {
+          if (time >= titleTimeline[i].start) return titleTimeline[i];
+        }
+        return titleTimeline[0];
+      };
+      const titleDriver = { t: 0 };
+      let lastTitle = null;
+
+      tl.to(titleDriver, {
+        t: titleClock,
+        duration: 1.3,
+        ease: "none",
+        onUpdate: () => {
+          const entry = titleStateAt(titleDriver.t);
+          if (entry.word !== lastTitle) {
+            titleEl.textContent = entry.word;
+            lastTitle = entry.word;
+          }
+        },
+      }, 0);
+
+      tl.fromTo(
+        '[id="f02-atlas-word"]',
+        { x: -90, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.55, ease: "power3.out" },
+        0.1,
+      );
+
+      tl.fromTo(
+        '[id="f02-atlas-blue-square"]',
+        { scaleX: 0, opacity: 0 },
+        { scaleX: 1, opacity: 1, duration: 0.62, ease: "power3.out" },
+        0.28,
+      );
+
+      tl.fromTo(
+        '[id="f02-atlas-phone"]',
+        { x: 110, y: 250, scale: 0, opacity: 0 },
+        { x: 0, y: 0, scale: 1, opacity: 1, duration: 0.7, ease: "power3.out" },
+        1.5,
+      );
+
+      const promiseEl = document.getElementById("f02-atlas-promise");
+      const promiseSequence = [
+        { t: 0, lines: [] },
+        { t: 0.05, lines: ["native"] },
+        { t: 0.6, lines: ["native", "locale"] },
+        { t: 1.15, lines: ["native", "locale", "sans compte"] },
+      ];
+      const promiseStateAt = (time) => {
+        for (let i = promiseSequence.length - 1; i >= 0; i -= 1) {
+          if (time >= promiseSequence[i].t) return promiseSequence[i];
+        }
+        return promiseSequence[0];
+      };
+      const promiseDriver = { t: 0 };
+      let lastPromiseCount = -1;
+
+      tl.to(promiseDriver, {
+        t: 1.7,
+        duration: 1.7,
+        ease: "none",
+        onUpdate: () => {
+          const entry = promiseStateAt(promiseDriver.t);
+          if (entry.lines.length !== lastPromiseCount) {
+            promiseEl.innerHTML = entry.lines
+              .map((line) => `<span class="02-atlas-line">${line}<span class="02-atlas-dot">.</span></span>`)
+              .join("");
+            lastPromiseCount = entry.lines.length;
+          }
+        },
+      }, 4.5);
+
+      tl.fromTo(
+        '[id="f02-atlas-footer"]',
+        { y: 14, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.45, ease: "power3.out" },
+        6.2,
+      );
+
+      tl.fromTo(
+        '[id="f02-atlas-rule"]',
+        { scaleX: 0 },
+        { scaleX: 1, duration: 0.42, ease: "power3.out" },
+        6.26,
+      );
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["02-atlas"] = tl;
+    })();
+  </script>
+</template>

@@ -7,6 +7,8 @@ ATLAS est une interface d’entraînement calme, précise et native iOS. La stru
 ## Hiérarchie
 
 - Une action d’entraînement principale maximum par écran.
+- Aucune phrase d’ambiance : un écran n’explique que ce qui change la prochaine action.
+- Une carte qui mène ailleurs est elle-même le lien; on n’ajoute pas de phrase indiquant où aller.
 - Les grands titres donnent le contexte; les petites capitales identifient la section ATLAS.
 - Les cartes regroupent une seule idée. Elles utilisent une surface système, un contour léger et aucun effet « gaming ».
 - Les informations secondaires restent en `secondary`; les erreurs importantes utilisent la couleur danger.
@@ -21,7 +23,7 @@ ATLAS est une interface d’entraînement calme, précise et native iOS. La stru
 - `success`, `warning`, `danger`: états sémantiques.
 - `screenPadding`, `sectionSpacing`, `cardCornerRadius`, `compactCornerRadius`: rythme commun.
 
-Les composants partagés sont `AtlasCard`, `MetricTile`, `AtlasSectionHeader`, `AtlasIconBadge`, `AtlasStatusPill` et `AtlasPrimaryButtonStyle`.
+Les composants partagés sont `AtlasCard`, `MetricTile`, `AtlasSectionHeader`, `AtlasIconBadge`, `AtlasStatusPill` et `AtlasPrimaryButtonStyle`. Les états vides utilisent directement `ContentUnavailableView`, sans surcouche ATLAS.
 
 ## Couleurs musculaires
 
@@ -37,7 +39,7 @@ Les composants partagés sont `AtlasCard`, `MetricTile`, `AtlasSectionHeader`, `
 
 ## Écrans principaux
 
-- **Jour** : action de séance, disponibilité, résumé hebdomadaire, coach, récupération et nutrition.
+- **Jour** : action de séance, connexion Santé si absente, récupération (disponibilité et signaux dans une seule carte), semaine, coach et nutrition.
 - **Séance** : démarrer/reprendre, bibliothèque, programmes et historique.
 - **Calendrier** : semaine, répartition musculaire et activités ATLAS/Santé dédupliquées.
 - **Progrès** : vue d’ensemble, mesures corporelles, records et tendances.

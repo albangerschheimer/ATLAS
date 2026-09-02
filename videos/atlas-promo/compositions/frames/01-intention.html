@@ -1,0 +1,191 @@
+<template>
+  <style>
+    #root {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      container-type: size;
+      color: #ffffff;
+    }
+
+    [class~="01-intention-bg"] {
+      position: absolute;
+      inset: 0;
+      background: #000000;
+    }
+
+    [class~="01-intention-content"] {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    [class~="01-intention-copy"] {
+      position: absolute;
+      top: 19.5cqh;
+      left: 5.5cqw;
+      width: 70cqw;
+      min-height: 35cqh;
+      margin: 0;
+      color: #ffffff;
+      font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 5.4cqw;
+      font-weight: 900;
+      line-height: 0.92;
+      letter-spacing: -0.045em;
+      text-transform: lowercase;
+      white-space: pre;
+    }
+
+    [class~="01-intention-main"],
+    [class~="01-intention-accent"] {
+      white-space: pre;
+    }
+
+    [class~="01-intention-accent"] {
+      color: #5265ff;
+    }
+
+    [class~="01-intention-caret"] {
+      display: inline-block;
+      width: 0.095em;
+      height: 0.74em;
+      margin-left: 0.075em;
+      background: #5265ff;
+      vertical-align: -0.04em;
+    }
+
+    [class~="01-intention-underline"] {
+      position: absolute;
+      top: 47.2cqh;
+      left: 5.5cqw;
+      width: 56.5cqw;
+      height: 1.2cqh;
+      overflow: visible;
+    }
+
+    [class~="01-intention-underline"] line {
+      fill: none;
+      stroke: #5265ff;
+      stroke-width: 2;
+      stroke-linecap: square;
+      vector-effect: non-scaling-stroke;
+    }
+  </style>
+
+  <div data-hf-id="hf-fz46" id="root" data-composition-id="01-intention" data-width="1920" data-height="1080" data-duration="5.4">
+    <div data-hf-id="hf-ulb9" id="f01-background-layer" class="clip 01-intention-bg" data-start="0" data-duration="5.4" data-track-index="0"></div>
+    <div data-hf-id="hf-fijz" id="f01-content-layer" class="clip 01-intention-content" data-start="0" data-duration="5.4" data-track-index="1">
+      <p data-hf-id="hf-81c0" class="01-intention-copy" aria-label="je voulais une app qui me permette de gérer toute ma progression."><span data-hf-id="hf-ajfv" id="f01-intention-main" class="01-intention-main" data-layout-allow-overlap=""></span><span data-hf-id="hf-8mwd" id="f01-intention-accent" class="01-intention-accent" data-layout-allow-overlap=""></span><span data-hf-id="hf-ld6u" id="f01-intention-caret" class="01-intention-caret" aria-hidden="true"></span></p>
+      <svg data-hf-id="hf-6fi4" class="01-intention-underline" viewBox="0 0 1000 12" preserveAspectRatio="none" aria-hidden="true">
+        <line data-hf-id="hf-c9ww" id="f01-intention-underline-path" x1="0" y1="6" x2="1000" y2="6" />
+      </svg>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const DURATION = 5;
+      const ACCENT = "#5265ff";
+      const prefix = "je voulais une app\nqui me permette de gérer\n";
+      const originalSuffix = "mes séances de musculation.";
+      const replacement = "toute ma progression.";
+      const original = prefix + originalSuffix;
+      const sequence = [{ t: 0, main: "", accent: "", color: ACCENT }];
+
+      function appendTimedStates(start, end, source, makeState) {
+        const weights = Array.from(source, (character, index) => {
+          if (character === " ") return 1.8;
+          if (character === "\n") return 2.25;
+          if (character === ".") return 2.7;
+          return [0.92, 1.08, 0.82, 1.18, 1][index % 5];
+        });
+        const totalWeight = weights.reduce((sum, weight) => sum + weight, 0);
+        let elapsedWeight = 0;
+        for (let index = 0; index < source.length; index += 1) {
+          elapsedWeight += weights[index];
+          sequence.push({
+            t: start + ((end - start) * elapsedWeight) / totalWeight,
+            ...makeState(index + 1),
+          });
+        }
+      }
+
+      appendTimedStates(0.08, 2.46, original, (count) => ({
+        main: original.slice(0, count),
+        accent: "",
+        color: ACCENT,
+      }));
+
+      appendTimedStates(2.62, 3.34, originalSuffix, (count) => ({
+        main: prefix + originalSuffix.slice(0, originalSuffix.length - count),
+        accent: "",
+        color: ACCENT,
+      }));
+
+      appendTimedStates(3.38, 4.16, replacement, (count) => ({
+        main: prefix,
+        accent: replacement.slice(0, count),
+        color: ACCENT,
+      }));
+
+      sequence.push({
+        t: 4.3,
+        main: prefix,
+        accent: replacement,
+        color: ACCENT,
+      });
+
+      function entryAt(time) {
+        for (let index = sequence.length - 1; index >= 0; index -= 1) {
+          if (time >= sequence[index].t) return sequence[index];
+        }
+        return sequence[0];
+      }
+
+      const mainElement = document.getElementById("f01-intention-main");
+      const accentElement = document.getElementById("f01-intention-accent");
+      const caretElement = document.getElementById("f01-intention-caret");
+      const underlinePath = document.getElementById("f01-intention-underline-path");
+      const changeTimes = sequence
+        .filter((entry, index) => index > 0 && (entry.main !== sequence[index - 1].main || entry.accent !== sequence[index - 1].accent))
+        .map((entry) => entry.t);
+
+      const underlineLength = underlinePath.getTotalLength();
+      underlinePath.style.strokeDasharray = `${underlineLength}`;
+      underlinePath.style.strokeDashoffset = `${underlineLength}`;
+
+      const driver = { t: 0 };
+      const tl = gsap.timeline({ paused: true });
+
+      tl.to(driver, {
+        t: DURATION,
+        duration: DURATION,
+        ease: "none",
+        onUpdate: () => {
+          const entry = entryAt(driver.t);
+          mainElement.textContent = entry.main;
+          accentElement.textContent = entry.accent;
+          caretElement.style.background = entry.color;
+
+          const isTyping = changeTimes.some((time) => time <= driver.t && driver.t - time < 0.11);
+          const blinkPhase = (driver.t / DURATION) * Math.PI * 2 * 6;
+          const blinkOpacity = isTyping ? 1 : Math.sin(blinkPhase) > 0 ? 1 : 0;
+          const resolveOpacity = driver.t < 4.3 ? 1 : Math.max(0, 1 - (driver.t - 4.3) / 0.12);
+          caretElement.style.opacity = `${Math.min(blinkOpacity, resolveOpacity)}`;
+        },
+      }, 0);
+
+      tl.fromTo(
+        underlinePath,
+        { strokeDashoffset: underlineLength },
+        { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" },
+        4.32,
+      );
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["01-intention"] = tl;
+    })();
+  </script>
+</template>

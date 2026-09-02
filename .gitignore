@@ -9,5 +9,6 @@ xcuserdata/
 *.dSYM.zip
 *.dSYM
 videos/**/.hyperframes/
+videos/**/.thumbnails/
 videos/**/node_modules/
 videos/**/snapshots/

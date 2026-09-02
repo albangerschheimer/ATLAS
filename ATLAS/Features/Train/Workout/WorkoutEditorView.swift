@@ -28,10 +28,10 @@ struct WorkoutEditorView: View {
         ScrollView {
             LazyVStack(spacing: 16) {
                 if workout.orderedExercises.isEmpty {
-                    EmptyStateView(
-                        icon: "dumbbell",
-                        title: "Séance vide",
-                        message: "Ajoutez un exercice pour commencer à enregistrer vos séries."
+                    ContentUnavailableView(
+                        "Séance vide",
+                        systemImage: "dumbbell",
+                        description: Text("Ajoutez un exercice pour commencer à enregistrer vos séries.")
                     )
                     .padding(.top, 50)
                 }
@@ -136,7 +136,11 @@ struct WorkoutEditorView: View {
             }
             Button("Continuer", role: .cancel) {}
         } message: {
-            Text("\(workout.completedSetCount) séries seront conservées dans l’historique.")
+            Text(
+                workout.completedSetCount > 1
+                    ? "\(workout.completedSetCount) séries seront conservées dans l’historique."
+                    : "1 série sera conservée dans l’historique."
+            )
         }
         .alert("Supprimer cette séance ?", isPresented: $showingDeleteConfirmation) {
             Button("Supprimer", role: .destructive) {

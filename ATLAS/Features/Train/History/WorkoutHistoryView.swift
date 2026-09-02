@@ -12,10 +12,10 @@ struct WorkoutHistoryView: View {
     var body: some View {
         List {
             if completed.isEmpty {
-                EmptyStateView(
-                    icon: "clock.arrow.circlepath",
-                    title: "Aucune séance terminée",
-                    message: "Les séances enregistrées apparaîtront ici."
+                ContentUnavailableView(
+                    "Aucune séance terminée",
+                    systemImage: "clock.arrow.circlepath",
+                    description: Text("Les séances enregistrées apparaîtront ici.")
                 )
                 .listRowBackground(Color.clear)
             } else {
@@ -32,7 +32,7 @@ struct WorkoutHistoryView: View {
                                     .font(.caption)
                                     .foregroundStyle(.secondary)
                             }
-                            Text("\(workout.completedSetCount) séries · \(workout.totalVolume.formatted(.number.precision(.fractionLength(0)))) kg")
+                            Text("\(workout.completedSetCountLabel) · \(workout.totalVolume.formatted(.number.precision(.fractionLength(0)))) kg")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }

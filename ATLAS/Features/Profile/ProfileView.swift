@@ -27,14 +27,16 @@ struct ProfileView: View {
                     .accessibilityElement(children: .combine)
                 }
 
-                Section("Données") {
-                    profileRow("Stockage sur cet iPhone", detail: "Privé", icon: "iphone", tint: AtlasTheme.accent)
-                    profileRow("Aucun compte ni backend", detail: "Local", icon: "icloud.slash", tint: AtlasTheme.success)
+                Section {
                     NavigationLink {
                         DataExportView()
                     } label: {
                         Label("Exporter les données", systemImage: "square.and.arrow.up")
                     }
+                } header: {
+                    Text("Données")
+                } footer: {
+                    Text("Tout est stocké sur cet iPhone : ni compte, ni serveur ATLAS.")
                 }
 
                 Section("Nutrition") {
@@ -46,48 +48,33 @@ struct ProfileView: View {
                     .accessibilityIdentifier("profile.nutrition")
                 }
 
-                Section("Intégrations") {
+                Section {
                     NavigationLink {
                         HealthSettingsView()
                     } label: {
-                        profileRow("Apple Santé", detail: "Disponible", icon: "heart.text.square.fill", tint: .red)
+                        Label {
+                            Text("Apple Santé")
+                        } icon: {
+                            Image(systemName: "heart.text.square.fill").foregroundStyle(.red)
+                        }
                     }
-                    profileRow("Foodvisor", detail: "via Santé", icon: "fork.knife", tint: .green)
-                    profileRow("Strava", detail: "via Santé", icon: "figure.run", tint: .orange)
+                } header: {
+                    Text("Intégrations")
+                } footer: {
+                    Text("Foodvisor et Strava arrivent via Apple Santé, facultatif et lu seulement après votre action. La caméra sert uniquement au scan de code-barres et les requêtes Open Food Facts ne contiennent aucune donnée de santé.")
                 }
 
-                Section("Confidentialité") {
-                    Text("Apple Santé est facultatif et lu uniquement après votre action. La caméra sert seulement au scan de code-barres et les requêtes Open Food Facts ne contiennent aucune donnée de santé.")
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
-                }
-
-                Section("ATLAS") {
+                Section {
                     LabeledContent(
                         "Version",
                         value: Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "—"
                     )
-                    LabeledContent("Édition", value: "Coach + Santé + Controls")
                 }
             }
             .listStyle(.insetGrouped)
             .scrollContentBackground(.hidden)
             .background(AtlasTheme.canvas)
             .navigationTitle("Profil")
-        }
-    }
-
-    private func profileRow(_ title: String, detail: String, icon: String, tint: Color) -> some View {
-        HStack {
-            Label {
-                Text(title)
-            } icon: {
-                Image(systemName: icon).foregroundStyle(tint)
-            }
-            Spacer()
-            Text(detail)
-                .font(.caption)
-                .foregroundStyle(.secondary)
         }
     }
 }
