@@ -80,8 +80,3 @@ swiftc -warnings-as-errors ATLAS/Core/*.swift Tests/CoreTestRunner.swift -o /tmp
 - `PRIVACY.md`
 - `ROADMAP.md`
 - `RELEASE_CHECKLIST.md`
-
-## Autres projets open source
-
-- [Predictions-Foot](https://github.com/albangerschheimer/Predictions-Foot) — projet réalisé avec l’aide de **GPT-5.5**.
-- [Lower-Back-Pain-Prediction](https://github.com/albangerschheimer/Lower-Back-Pain-Prediction) — projet réalisé avec l’aide de **GPT-5.5**.
