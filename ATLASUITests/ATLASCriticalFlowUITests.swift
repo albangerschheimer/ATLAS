@@ -32,6 +32,12 @@ final class ATLASCriticalFlowUITests: XCTestCase {
         XCTAssertFalse(entry.waitForExistence(timeout: 2))
     }
 
+    func testTodayNutritionCardOpensTheNutritionJournal() {
+        app.tabBars.buttons["Jour"].tap()
+        app.buttons["today.nutrition"].tap()
+        XCTAssertTrue(app.navigationBars["Nutrition"].waitForExistence(timeout: 4))
+    }
+
     func testCreateExerciseProgramWorkoutAndHistory() {
         app.tabBars.buttons["Séance"].tap()
 

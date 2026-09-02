@@ -279,6 +279,7 @@ struct TodayView: View {
             }
         }
         .buttonStyle(.plain)
+        .accessibilityIdentifier("today.nutrition")
     }
 
     private func nutritionProgress(
