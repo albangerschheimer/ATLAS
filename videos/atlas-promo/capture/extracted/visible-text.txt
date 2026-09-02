@@ -1,0 +1,11 @@
+ATLAS est une application iPhone native et local-first pour gérer ses séances de musculation.
+
+Je voulais une app qui me permette de gérer mes séances de musculation, mes programmes, ma bibliothèque d’exercices, mon historique et ma progression, sans sacrifier la vitesse d’utilisation à la salle.
+
+ATLAS permet de lancer une séance libre, créer des programmes, parcourir 214 exercices, suivre les charges, répétitions, RIR, records et estimations de 1RM, réunir le calendrier sportif, Apple Santé et la nutrition.
+
+Le projet est open source sous licence MIT.
+
+Transparence : l’IA a été utilisée pour aider à réaliser ATLAS et cette vidéo — GPT-5.6 Sol.
+
+Autres projets : Predictions-Foot et Lower-Back-Pain-Prediction — GPT-5.5 utilisé.

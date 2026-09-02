@@ -1,0 +1,453 @@
+<template>
+  <style>
+    #root {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      container-type: size;
+      color: #ffffff;
+      font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    .clip {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .f03-seance-ground {
+      background: #000000;
+    }
+
+    .f03-seance-ground::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 18px;
+      height: 100%;
+      background: #5265ff;
+    }
+
+    .f03-seance-layout {
+      position: absolute;
+      inset: 0;
+    }
+
+    .f03-seance-accent-plane {
+      position: absolute;
+      left: 250px;
+      top: 156px;
+      width: 518px;
+      height: 612px;
+      background: #5265ff;
+      transform-origin: 0 50%;
+    }
+
+    .f03-seance-device {
+      position: absolute;
+      left: 356px;
+      top: 92px;
+      width: 322px;
+      height: 700px;
+      border: 1px solid #484950;
+      background: #000000;
+      overflow: hidden;
+      box-sizing: border-box;
+      transform-origin: 50% 50%;
+    }
+
+    .f03-seance-device img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .f03-seance-device-rule {
+      position: absolute;
+      left: 319px;
+      top: 91px;
+      width: 1px;
+      height: 702px;
+      background: #262628;
+    }
+
+    .f03-seance-kicker {
+      position: absolute;
+      left: 1016px;
+      top: 112px;
+      width: 690px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 17px;
+      font-weight: 500;
+      line-height: 1.3;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #5265ff;
+    }
+
+    .f03-seance-kicker-rule {
+      display: inline-block;
+      width: 36px;
+      height: 2px;
+      margin-right: 18px;
+      vertical-align: 5px;
+      background: #5265ff;
+    }
+
+    .f03-seance-state-stage {
+      position: absolute;
+      left: 1012px;
+      top: 242px;
+      width: 728px;
+      height: 330px;
+    }
+
+    .f03-seance-state {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      margin: 0;
+      font-size: 82px;
+      font-weight: 800;
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+      text-transform: lowercase;
+      color: #ffffff;
+      transform-origin: 0 50%;
+    }
+
+    .f03-seance-state .f03-seance-blue {
+      color: #5265ff;
+    }
+
+    .f03-seance-counter-state {
+      position: absolute;
+      left: 0;
+      top: -44px;
+      width: 660px;
+    }
+
+    .f03-seance-counter-wrap {
+      display: flex;
+      align-items: baseline;
+      width: 570px;
+      height: 164px;
+      color: #5265ff;
+    }
+
+    .f03-seance-counter {
+      display: inline-block;
+      width: 330px;
+      font-size: 158px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.055em;
+      font-variant-numeric: tabular-nums;
+      transform-origin: 0 80%;
+    }
+
+    .f03-seance-counter-label {
+      margin-top: 18px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 22px;
+      font-weight: 500;
+      line-height: 1.2;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #ffffff;
+    }
+
+    .f03-seance-targets {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: visible;
+      pointer-events: none;
+    }
+
+    .f03-seance-targets path {
+      fill: none;
+      stroke: #5265ff;
+      stroke-width: 2;
+      stroke-linecap: square;
+      stroke-linejoin: miter;
+    }
+
+    .f03-seance-marker-ring {
+      fill: #000000;
+      stroke: #5265ff;
+      stroke-width: 3;
+    }
+
+    .f03-seance-marker-core {
+      fill: #5265ff;
+    }
+
+    .f03-seance-benefits {
+      position: absolute;
+      left: 1014px;
+      top: 205px;
+      width: 690px;
+    }
+
+    .f03-seance-benefit {
+      position: relative;
+      height: 154px;
+      border-top: 1px solid #484950;
+      padding-top: 18px;
+      box-sizing: border-box;
+      transform-origin: 0 0;
+    }
+
+    .f03-seance-benefit-index {
+      position: absolute;
+      left: 0;
+      top: 21px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 16px;
+      letter-spacing: 0.14em;
+      color: #5265ff;
+    }
+
+    .f03-seance-benefit-label {
+      margin-left: 74px;
+      font-size: 46px;
+      font-weight: 750;
+      line-height: 1.02;
+      letter-spacing: -0.035em;
+      text-transform: lowercase;
+      color: #ffffff;
+    }
+
+    .f03-seance-benefit:last-child .f03-seance-benefit-label {
+      color: #5265ff;
+    }
+
+    .f03-seance-bottom-rule {
+      position: absolute;
+      left: 1014px;
+      top: 680px;
+      width: 690px;
+      height: 1px;
+      background: #262628;
+    }
+  </style>
+
+  <div data-hf-id="hf-vp22" id="root" data-composition-id="03-seance" data-width="1920" data-height="1080" data-duration="9.5">
+    <div data-hf-id="hf-3cyt" id="f03-background-layer" class="clip f03-seance-ground" data-start="0" data-duration="9.5" data-track-index="0"></div>
+
+    <div data-hf-id="hf-l6o8" id="f03-content-layer" class="clip" data-start="0" data-duration="9.5" data-track-index="1">
+      <div data-hf-id="hf-h9ja" class="f03-seance-layout">
+        <div data-hf-id="hf-q2i5" class="f03-seance-accent-plane" data-el="accent-plane"></div>
+        <div data-hf-id="hf-71it" class="f03-seance-device-rule" data-el="device-rule"></div>
+
+        <div data-hf-id="hf-zw23" class="f03-seance-device" data-el="device">
+          <img data-hf-id="hf-60rw" src="assets/atlas-training.png" alt="Écran Séance de l’application Atlas">
+        </div>
+
+        <div data-hf-id="hf-l73w" class="f03-seance-kicker" data-el="kicker">
+          <span data-hf-id="hf-85zb" class="f03-seance-kicker-rule"></span>LA SÉANCE, SANS FRICTION
+        </div>
+
+        <svg data-hf-id="hf-roxy" class="f03-seance-targets" viewBox="0 0 1920 1080" aria-hidden="true">
+          <path data-hf-id="hf-d0tl" data-el="path-free" d="M 678 236 H 892 L 962 294" />
+          <path data-hf-id="hf-00kw" data-el="path-programs" d="M 678 365 H 868 L 962 344" />
+          <path data-hf-id="hf-fyrd" data-el="path-library" d="M 678 302 H 902 L 962 394" />
+          <circle data-hf-id="hf-llv1" class="f03-seance-marker-ring" data-el="marker-ring" cx="678" cy="236" r="12" />
+          <circle data-hf-id="hf-7o9s" class="f03-seance-marker-core" data-el="marker-core" cx="678" cy="236" r="4" />
+        </svg>
+
+        <div data-hf-id="hf-392e" class="f03-seance-state-stage">
+          <p data-hf-id="hf-oi2a" class="f03-seance-state" data-el="state-free">séance<br data-hf-id="hf-x5px"><span data-hf-id="hf-cd37" class="f03-seance-blue">libre</span></p>
+          <p data-hf-id="hf-8hlr" class="f03-seance-state" data-el="state-programs">programmes<br data-hf-id="hf-rsrt"><span data-hf-id="hf-7rna" class="f03-seance-blue">sur mesure</span></p>
+
+          <div data-hf-id="hf-acd5" class="f03-seance-counter-state" data-el="counter-state">
+            <div data-hf-id="hf-pb8d" class="f03-seance-counter-wrap">
+              <span data-hf-id="hf-gyr0" class="f03-seance-counter" data-el="counter">0</span>
+            </div>
+            <div data-hf-id="hf-xgh7" class="f03-seance-counter-label" data-el="counter-label">EXERCICES DANS LA BIBLIOTHÈQUE</div>
+          </div>
+        </div>
+
+        <div data-hf-id="hf-hker" class="f03-seance-benefits" data-el="benefits">
+          <div data-hf-id="hf-eybr" class="f03-seance-benefit" data-el="benefit-1">
+            <span data-hf-id="hf-x5so" class="f03-seance-benefit-index">01</span>
+            <div data-hf-id="hf-zell" class="f03-seance-benefit-label">séance libre</div>
+          </div>
+          <div data-hf-id="hf-42u4" class="f03-seance-benefit" data-el="benefit-2">
+            <span data-hf-id="hf-vyvl" class="f03-seance-benefit-index">02</span>
+            <div data-hf-id="hf-bubs" class="f03-seance-benefit-label">programmes sur mesure</div>
+          </div>
+          <div data-hf-id="hf-4uhx" class="f03-seance-benefit" data-el="benefit-3">
+            <span data-hf-id="hf-wd6m" class="f03-seance-benefit-index">03</span>
+            <div data-hf-id="hf-trus" class="f03-seance-benefit-label">214 exercices</div>
+          </div>
+        </div>
+
+        <div data-hf-id="hf-ur71" class="f03-seance-bottom-rule" data-el="bottom-rule"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script>
+    (() => {
+      const root = document.querySelector('[data-composition-id="03-seance"]');
+      const selectors = {
+        "accent-plane": '[data-el="accent-plane"]',
+        "benefit-1": '[data-el="benefit-1"]',
+        "benefit-2": '[data-el="benefit-2"]',
+        "benefit-3": '[data-el="benefit-3"]',
+        "bottom-rule": '[data-el="bottom-rule"]',
+        counter: '[data-el="counter"]',
+        "counter-label": '[data-el="counter-label"]',
+        "counter-state": '[data-el="counter-state"]',
+        device: '[data-el="device"]',
+        "device-rule": '[data-el="device-rule"]',
+        kicker: '[data-el="kicker"]',
+        "marker-core": '[data-el="marker-core"]',
+        "marker-ring": '[data-el="marker-ring"]',
+        "path-free": '[data-el="path-free"]',
+        "path-library": '[data-el="path-library"]',
+        "path-programs": '[data-el="path-programs"]',
+        "state-free": '[data-el="state-free"]',
+        "state-programs": '[data-el="state-programs"]',
+      };
+      const pick = (name) => root.querySelector(selectors[name]);
+      const counterElement = pick("counter");
+      const tl = gsap.timeline({ paused: true });
+
+      const paths = [pick("path-free"), pick("path-programs"), pick("path-library")];
+      paths.forEach((path) => {
+        const length = path.getTotalLength();
+        path.style.strokeDasharray = `${length}`;
+        path.style.strokeDashoffset = `${length}`;
+      });
+
+      tl.set(
+        [
+          pick("state-free"),
+          pick("state-programs"),
+          pick("counter-state"),
+          pick("marker-ring"),
+          pick("marker-core"),
+          pick("benefit-1"),
+          pick("benefit-2"),
+          pick("benefit-3"),
+          pick("bottom-rule"),
+        ],
+        { opacity: 0 },
+        0,
+      );
+
+      tl.fromTo(
+        pick("accent-plane"),
+        { scaleX: 0, opacity: 0 },
+        { scaleX: 1, opacity: 1, duration: 0.62, ease: "power3.out" },
+        0.02,
+      );
+      tl.fromTo(
+        pick("device"),
+        { x: -260, scale: 0.92, opacity: 0 },
+        { x: 0, scale: 1, opacity: 1, duration: 0.72, ease: "power3.out" },
+        0.02,
+      );
+      tl.fromTo(
+        pick("device-rule"),
+        { scaleY: 0, opacity: 0 },
+        { scaleY: 1, opacity: 1, duration: 0.54, ease: "power2.out", transformOrigin: "50% 0%" },
+        0.28,
+      );
+      tl.fromTo(
+        pick("kicker"),
+        { y: 18, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" },
+        0.3,
+      );
+
+      tl.fromTo(
+        [pick("marker-ring"), pick("marker-core")],
+        { scale: 0, opacity: 0, transformOrigin: "50% 50%" },
+        { scale: 1, opacity: 1, duration: 0.42, ease: "power3.out" },
+        2.1,
+      );
+      tl.to(pick("path-free"), { strokeDashoffset: 0, duration: 0.58, ease: "power2.out" }, 2.1);
+      tl.fromTo(
+        pick("state-free"),
+        { y: 34, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.62, ease: "power3.out" },
+        2.28,
+      );
+
+      tl.to(pick("state-free"), { y: -26, opacity: 0, duration: 0.22, ease: "power2.in" }, 3.92);
+      tl.to([pick("marker-ring"), pick("marker-core")], { attr: { cy: 365 }, duration: 0.55, ease: "power2.inOut" }, 4.0);
+      tl.to(pick("path-programs"), { strokeDashoffset: 0, duration: 0.58, ease: "power2.out" }, 4.0);
+      tl.fromTo(
+        pick("state-programs"),
+        { y: 34, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.62, ease: "power3.out" },
+        4.12,
+      );
+
+      tl.to(pick("state-programs"), { y: -26, opacity: 0, duration: 0.18, ease: "power2.in" }, 5.78);
+      tl.to([pick("marker-ring"), pick("marker-core")], { attr: { cy: 302 }, duration: 0.46, ease: "power2.inOut" }, 6.0);
+      tl.to(pick("path-library"), { strokeDashoffset: 0, duration: 0.58, ease: "power2.out" }, 6.0);
+      tl.fromTo(
+        pick("counter-state"),
+        { y: 28, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.48, ease: "power3.out" },
+        6.04,
+      );
+
+      const count = { value: 0 };
+      tl.to(
+        count,
+        {
+          value: 214,
+          duration: 1.2,
+          ease: "power3.out",
+          onUpdate: () => {
+            counterElement.textContent = Math.round(count.value).toLocaleString("fr-FR");
+          },
+        },
+        6.12,
+      );
+      tl.fromTo(
+        pick("counter"),
+        { scale: 0.52 },
+        { scale: 1, duration: 1.2, ease: "power3.out" },
+        6.12,
+      );
+      tl.fromTo(
+        pick("counter-label"),
+        { y: 12, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.48, ease: "power2.out" },
+        6.28,
+      );
+
+      tl.to(pick("counter-state"), { opacity: 0, y: -14, duration: 0.16, ease: "power1.in" }, 7.48);
+      [pick("benefit-1"), pick("benefit-2"), pick("benefit-3")].forEach((item, index) => {
+        tl.fromTo(
+          item,
+          { scaleX: 0.82, x: 24, opacity: 0 },
+          { scaleX: 1, x: 0, opacity: 1, duration: 0.46, ease: "power3.out" },
+          7.72 + index * 0.16,
+        );
+      });
+      tl.fromTo(
+        pick("bottom-rule"),
+        { scaleX: 0, opacity: 0, transformOrigin: "0% 50%" },
+        { scaleX: 1, opacity: 1, duration: 0.5, ease: "power2.out" },
+        8.02,
+      );
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["03-seance"] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,202 @@
+<template>
+  <div data-hf-id="hf-o0x3" id="root" data-composition-id="05-transparence" data-width="1920" data-height="1080" data-duration="7.5">
+    <div data-hf-id="hf-g63b" id="f05-background-layer" class="clip f05-transparence-ground" data-start="0" data-duration="7.5" data-track-index="0" aria-hidden="true"></div>
+
+    <section data-hf-id="hf-w5ab" id="f05-content-layer" class="clip f05-transparence-stage" data-start="0" data-duration="7.5" data-track-index="1" aria-label="Transparence du projet">
+      <div data-hf-id="hf-gaif" class="f05-transparence-beat f05-transparence-beat-one" id="f05-transparence-beat-one">
+        <div data-hf-id="hf-nrcw" class="f05-transparence-kicker" id="f05-transparence-kicker">TRANSPARENCE</div>
+        <div data-hf-id="hf-h84u" class="f05-transparence-primary" id="f05-transparence-primary">ia utilisée</div>
+      </div>
+
+      <div data-hf-id="hf-vg67" class="f05-transparence-beat f05-transparence-beat-two" id="f05-transparence-beat-two">
+        <div data-hf-id="hf-6a4y" class="f05-transparence-model" id="f05-transparence-model">
+          <span data-hf-id="hf-n6e9">gpt-</span><span data-hf-id="hf-sc8s" id="f05-transparence-model-accent">5.6 sol</span>
+        </div>
+      </div>
+
+      <div data-hf-id="hf-d636" class="f05-transparence-lower-third" id="f05-transparence-lower-third">
+        <div data-hf-id="hf-o2k5" class="f05-transparence-rule" id="f05-transparence-rule" aria-hidden="true"></div>
+        <div data-hf-id="hf-4n10" class="f05-transparence-credit" id="f05-transparence-credit">
+          AIDE À LA RÉALISATION DU PROJET + DE CETTE VIDÉO
+        </div>
+        <div data-hf-id="hf-answ" class="f05-transparence-license" id="f05-transparence-license">open source · mit</div>
+      </div>
+    </section>
+  </div>
+
+  <style>
+    #root {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      container-type: size;
+      color: #FFFFFF;
+      font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    .f05-transparence-ground {
+      position: absolute;
+      inset: 0;
+      background: #000000;
+    }
+
+    .f05-transparence-stage {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .f05-transparence-beat {
+      position: absolute;
+      left: 5.5cqw;
+      right: 5.5cqw;
+      top: 0;
+      height: 61cqh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .f05-transparence-kicker {
+      margin-bottom: 2.2cqh;
+      color: #5265FF;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.9cqw;
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .f05-transparence-primary,
+    .f05-transparence-model,
+    .f05-transparence-license {
+      font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      text-transform: lowercase;
+    }
+
+    .f05-transparence-primary {
+      width: 70%;
+      color: #FFFFFF;
+      font-size: 10.6cqw;
+      line-height: 0.88;
+      white-space: nowrap;
+    }
+
+    .f05-transparence-model {
+      width: 100%;
+      color: #FFFFFF;
+      font-size: 12.3cqw;
+      line-height: 0.88;
+      white-space: nowrap;
+    }
+
+    #f05-transparence-model-accent {
+      color: #FFFFFF;
+    }
+
+    .f05-transparence-lower-third {
+      position: absolute;
+      left: 5.5cqw;
+      right: 5.5cqw;
+      top: 60.8cqh;
+      height: 21.5cqh;
+    }
+
+    .f05-transparence-rule {
+      width: 100%;
+      height: 2px;
+      background: #5265FF;
+      transform-origin: left center;
+    }
+
+    .f05-transparence-credit {
+      margin-top: 2.2cqh;
+      color: #5265FF;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.78cqw;
+      font-weight: 500;
+      line-height: 1.2;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .f05-transparence-license {
+      margin-top: 2.8cqh;
+      color: #FFFFFF;
+      font-size: 3.8cqw;
+      line-height: 0.92;
+      white-space: nowrap;
+    }
+  </style>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script>
+    (() => {
+      const root = document.querySelector('[data-composition-id="05-transparence"]');
+      const beatOne = root.querySelector('#f05-transparence-beat-one');
+      const beatTwo = root.querySelector('#f05-transparence-beat-two');
+      const primary = root.querySelector('#f05-transparence-primary');
+      const kicker = root.querySelector('#f05-transparence-kicker');
+      const modelAccent = root.querySelector('#f05-transparence-model-accent');
+      const lowerThird = root.querySelector('#f05-transparence-lower-third');
+      const rule = root.querySelector('#f05-transparence-rule');
+      const credit = root.querySelector('#f05-transparence-credit');
+      const license = root.querySelector('#f05-transparence-license');
+
+      const PULSE = 0.1;
+      const BEATS = [PULSE * 1, PULSE * 15, PULSE * 29, PULSE * 47, PULSE * 59];
+      const tl = gsap.timeline({ paused: true });
+
+      gsap.set([beatTwo, lowerThird, credit, license], { autoAlpha: 0 });
+      tl.set(beatOne, { autoAlpha: 1 }, 0);
+
+      tl.fromTo(
+        primary,
+        { scale: 1.42, filter: 'blur(18px)', opacity: 0 },
+        { scale: 1, filter: 'blur(0px)', opacity: 1, duration: 0.48, ease: 'power4.out' },
+        BEATS[0]
+      );
+      tl.fromTo(
+        kicker,
+        { x: -140, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.4, ease: 'expo.out' },
+        BEATS[0] + PULSE * 2
+      );
+
+      tl.set(beatOne, { autoAlpha: 0 }, BEATS[1]);
+      tl.set(beatTwo, { autoAlpha: 1 }, BEATS[1]);
+      tl.set(modelAccent, { color: '#5265FF' }, BEATS[2]);
+
+      tl.set(lowerThird, { autoAlpha: 1 }, BEATS[3]);
+      tl.fromTo(
+        rule,
+        { scaleX: 0 },
+        { scaleX: 1, duration: 0.62, ease: 'power3.inOut' },
+        BEATS[3]
+      );
+      tl.fromTo(
+        credit,
+        { y: 32, opacity: 0, filter: 'blur(8px)' },
+        { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.46, ease: 'circ.out' },
+        BEATS[3] + PULSE * 4
+      );
+
+      tl.fromTo(
+        license,
+        { y: 70, rotation: 2.5, opacity: 0 },
+        { y: 0, rotation: 0, opacity: 1, duration: 0.52, ease: 'back.out(1.8)' },
+        BEATS[4]
+      );
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines['05-transparence'] = tl;
+    })();
+  </script>
+</template>

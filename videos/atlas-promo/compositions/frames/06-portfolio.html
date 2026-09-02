@@ -1,0 +1,415 @@
+<template>
+  <style>
+    #root {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      container-type: size;
+      color: #FFFFFF;
+      font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    .clip {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .frame-06-portfolio-ground {
+      background: #000000;
+    }
+
+    .frame-06-portfolio-ground::before {
+      content: "";
+      position: absolute;
+      left: 5.5cqw;
+      top: 5.5cqw;
+      width: 36px;
+      height: 2px;
+      background: #5265FF;
+    }
+
+    .frame-06-portfolio-shell {
+      position: absolute;
+      inset: 0;
+    }
+
+    .frame-06-portfolio-header {
+      position: absolute;
+      left: 5.5cqw;
+      top: 7.7cqh;
+      width: 82cqw;
+      transform-origin: left top;
+      z-index: 4;
+    }
+
+    .frame-06-portfolio-kicker,
+    .frame-06-portfolio-panel-index,
+    .frame-06-portfolio-panel-path,
+    .frame-06-portfolio-badge,
+    .frame-06-portfolio-payoff-kicker {
+      font-family: "IBM Plex Mono", monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-weight: 500;
+    }
+
+    .frame-06-portfolio-kicker {
+      min-height: 20px;
+      margin-bottom: 2.1cqh;
+      color: #5265FF;
+      font-size: 14px;
+      line-height: 1;
+    }
+
+    .frame-06-portfolio-title {
+      max-width: 78cqw;
+      color: #FFFFFF;
+      font-size: 6.6cqw;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 0.94;
+      text-transform: lowercase;
+    }
+
+    .frame-06-portfolio-title-line {
+      display: block;
+      min-height: 0.94em;
+      white-space: nowrap;
+    }
+
+    .frame-06-portfolio-panel-stage {
+      position: absolute;
+      left: 5.5cqw;
+      top: 33.4cqh;
+      width: 89cqw;
+      height: 41.4cqh;
+      z-index: 3;
+    }
+
+    .frame-06-portfolio-panel {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      box-sizing: border-box;
+      width: 44.5cqw;
+      height: 41.4cqh;
+      border-top: 1px solid #262628;
+      border-bottom: 1px solid #262628;
+      background: #000000;
+      will-change: transform, opacity;
+    }
+
+    .frame-06-portfolio-panel-inner {
+      position: absolute;
+      inset: 0;
+      box-sizing: border-box;
+      padding: 3.1cqw 3.2cqw 2.5cqw;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .frame-06-portfolio-panel-index {
+      color: #FFFFFF;
+      opacity: 0.55;
+      font-size: 13px;
+      line-height: 1;
+    }
+
+    .frame-06-portfolio-panel-name {
+      max-width: 36cqw;
+      margin-top: 2.8cqh;
+      color: #FFFFFF;
+      font-size: 2.72cqw;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.02;
+    }
+
+    .frame-06-portfolio-panel-name span {
+      display: block;
+    }
+
+    .frame-06-portfolio-panel-footer {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2cqw;
+    }
+
+    .frame-06-portfolio-panel-path {
+      max-width: 21cqw;
+      color: #FFFFFF;
+      opacity: 0.55;
+      font-size: 12px;
+      line-height: 1.4;
+      overflow-wrap: anywhere;
+    }
+
+    .frame-06-portfolio-badge {
+      flex: 0 0 auto;
+      box-sizing: border-box;
+      padding: 12px 14px 10px;
+      border: 1px solid #5265FF;
+      color: #5265FF;
+      font-size: 12px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .frame-06-portfolio-divider {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 1px;
+      background: #262628;
+      transform-origin: center top;
+      z-index: 5;
+    }
+
+    .frame-06-portfolio-payoff {
+      position: absolute;
+      left: 5.5cqw;
+      top: 27.8cqh;
+      width: 89cqw;
+      z-index: 6;
+    }
+
+    .frame-06-portfolio-payoff-kicker {
+      margin-bottom: 3.7cqh;
+      color: #5265FF;
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .frame-06-portfolio-url-mask {
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      will-change: clip-path;
+    }
+
+    .frame-06-portfolio-url {
+      display: block;
+      color: #FFFFFF;
+      font-size: 4.9cqw;
+      font-weight: 900;
+      letter-spacing: -0.045em;
+      line-height: 0.95;
+    }
+
+    .frame-06-portfolio-payoff-rule {
+      width: 100%;
+      height: 1px;
+      margin-top: 5.2cqh;
+      background: #262628;
+      transform-origin: left center;
+    }
+
+    .frame-06-portfolio-corner-mark {
+      position: absolute;
+      right: 5.5cqw;
+      top: 7.7cqh;
+      color: #FFFFFF;
+      opacity: 0.55;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+  </style>
+
+  <div data-hf-id="hf-d7tt" id="root" data-composition-id="06-portfolio" data-width="1920" data-height="1080" data-duration="9">
+    <div data-hf-id="hf-60cn" id="f06-background-layer" class="clip frame-06-portfolio-ground" data-start="0" data-duration="9" data-track-index="0"></div>
+
+    <div data-hf-id="hf-g5dn" id="f06-content-layer" class="clip frame-06-portfolio-content" data-start="0" data-duration="9" data-track-index="1">
+      <div data-hf-id="hf-lfck" class="frame-06-portfolio-shell">
+        <div data-hf-id="hf-orzm" class="frame-06-portfolio-corner-mark">06 / PORTFOLIO</div>
+
+        <div data-hf-id="hf-43og" class="frame-06-portfolio-header" id="f06-portfolio-header">
+          <div data-hf-id="hf-9v5z" class="frame-06-portfolio-kicker" id="f06-portfolio-kicker">ATLAS · OPEN SOURCE</div>
+          <div data-hf-id="hf-v7ul" class="frame-06-portfolio-title" aria-label="un portfolio ouvert">
+            <span data-hf-id="hf-j3qf" class="frame-06-portfolio-title-line" id="f06-portfolio-title-a" data-layout-allow-overlap="">un portfolio</span>
+            <span data-hf-id="hf-szyb" class="frame-06-portfolio-title-line" id="f06-portfolio-title-b" data-layout-allow-overlap=""></span>
+          </div>
+        </div>
+
+        <div data-hf-id="hf-nio2" class="frame-06-portfolio-panel-stage" id="f06-portfolio-panel-stage">
+          <article data-hf-id="hf-apxu" class="frame-06-portfolio-panel" id="f06-portfolio-panel-left" data-target-x="-427" data-target-y="0">
+            <div data-hf-id="hf-rn0z" class="frame-06-portfolio-panel-inner">
+              <div data-hf-id="hf-yeow">
+                <div data-hf-id="hf-u9s8" class="frame-06-portfolio-panel-index">PROJECT / 01</div>
+                <div data-hf-id="hf-9ax9" class="frame-06-portfolio-panel-name">Predictions-Foot</div>
+              </div>
+              <div data-hf-id="hf-gl0c" class="frame-06-portfolio-panel-footer">
+                <div data-hf-id="hf-x9do" class="frame-06-portfolio-panel-path">/Predictions-Foot</div>
+                <div data-hf-id="hf-jxoo" class="frame-06-portfolio-badge">GPT-5.5 UTILISÉ</div>
+              </div>
+            </div>
+          </article>
+
+          <article data-hf-id="hf-86hq" class="frame-06-portfolio-panel" id="f06-portfolio-panel-right" data-target-x="427" data-target-y="0">
+            <div data-hf-id="hf-jbub" class="frame-06-portfolio-panel-inner">
+              <div data-hf-id="hf-y7yw">
+                <div data-hf-id="hf-t2v5" class="frame-06-portfolio-panel-index">PROJECT / 02</div>
+                <div data-hf-id="hf-zhos" class="frame-06-portfolio-panel-name"><span data-hf-id="hf-4jto">Lower-Back-Pain-</span><span data-hf-id="hf-34a0">Prediction</span></div>
+              </div>
+              <div data-hf-id="hf-7adw" class="frame-06-portfolio-panel-footer">
+                <div data-hf-id="hf-0v3p" class="frame-06-portfolio-panel-path">/Lower-Back-Pain-Prediction</div>
+                <div data-hf-id="hf-frnk" class="frame-06-portfolio-badge">GPT-5.5 UTILISÉ</div>
+              </div>
+            </div>
+          </article>
+
+          <div data-hf-id="hf-gppd" class="frame-06-portfolio-divider" id="f06-portfolio-divider" aria-hidden="true"></div>
+        </div>
+
+        <div data-hf-id="hf-if7g" class="frame-06-portfolio-payoff" id="f06-portfolio-payoff">
+          <div data-hf-id="hf-vvx5" class="frame-06-portfolio-payoff-kicker" id="f06-portfolio-payoff-kicker">EXPLORE LE CODE</div>
+          <div data-hf-id="hf-zd6o" class="frame-06-portfolio-url-mask" id="f06-portfolio-url-mask">
+            <span data-hf-id="hf-ss4z" class="frame-06-portfolio-url">github.com/albangerschheimer</span>
+          </div>
+          <div data-hf-id="hf-62w8" class="frame-06-portfolio-payoff-rule" id="f06-portfolio-payoff-rule"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const root = document.querySelector('[data-composition-id="06-portfolio"]');
+      const q = (selector) => root.querySelector(selector);
+      const tl = gsap.timeline({ paused: true });
+
+      const kicker = q('#f06-portfolio-kicker');
+      const titleA = q('#f06-portfolio-title-a');
+      const titleB = q('#f06-portfolio-title-b');
+      const header = q('#f06-portfolio-header');
+      const leftPanel = q('#f06-portfolio-panel-left');
+      const rightPanel = q('#f06-portfolio-panel-right');
+      const divider = q('#f06-portfolio-divider');
+      const payoff = q('#f06-portfolio-payoff');
+      const payoffKicker = q('#f06-portfolio-payoff-kicker');
+      const urlMask = q('#f06-portfolio-url-mask');
+      const payoffRule = q('#f06-portfolio-payoff-rule');
+
+      const headlineStates = [
+        { t: 0.00, kicker: 'ATLAS · OPEN SOURCE', a: 'un portfolio', b: '' },
+        { t: 0.22, kicker: 'ATLAS · OPEN SOURCE', a: 'un portfolio', b: 'ouvert' }
+      ];
+
+      const stateAt = (time) => {
+        for (let i = headlineStates.length - 1; i >= 0; i -= 1) {
+          if (time >= headlineStates[i].t) return headlineStates[i];
+        }
+        return headlineStates[0];
+      };
+
+      const headlineDriver = { t: 0 };
+      const frameDriver = { t: 0 };
+
+      gsap.set([leftPanel, rightPanel], { xPercent: -50, yPercent: -50, opacity: 0 });
+      gsap.set(divider, { scaleY: 0, opacity: 0 });
+      gsap.set(payoff, { opacity: 0 });
+      gsap.set(payoffKicker, { x: 24, opacity: 0 });
+      gsap.set(urlMask, { clipPath: 'polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)' });
+      gsap.set(payoffRule, { scaleX: 0 });
+
+      tl.fromTo(
+        header,
+        { x: -18, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.42, ease: 'power3.out' },
+        0
+      );
+
+      tl.to(
+        headlineDriver,
+        {
+          t: 1.25,
+          duration: 1.25,
+          ease: 'none',
+          onUpdate: () => {
+            const state = stateAt(headlineDriver.t);
+            kicker.textContent = state.kicker;
+            titleA.textContent = state.a;
+            titleB.textContent = state.b;
+          }
+        },
+        0
+      );
+
+      tl.fromTo(
+        leftPanel,
+        { xPercent: -50, yPercent: -50, x: -128.1, y: 34, scale: 0.94, opacity: 0 },
+        { xPercent: -50, yPercent: -50, x: -427, y: 0, scale: 1, opacity: 1, duration: 1.16, ease: 'power3.out' },
+        1.5
+      );
+
+      tl.fromTo(
+        leftPanel.querySelector('.frame-06-portfolio-panel-inner'),
+        { x: 22, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.56, ease: 'power3.out' },
+        2.18
+      );
+
+      tl.fromTo(
+        rightPanel,
+        { xPercent: -50, yPercent: -50, x: 128.1, y: 34, scale: 0.94, opacity: 0 },
+        { xPercent: -50, yPercent: -50, x: 427, y: 0, scale: 1, opacity: 1, duration: 1.1, ease: 'power3.out' },
+        3.7
+      );
+
+      tl.fromTo(
+        rightPanel.querySelector('.frame-06-portfolio-panel-inner'),
+        { x: -22, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.56, ease: 'power3.out' },
+        4.34
+      );
+
+      tl.to(divider, { scaleY: 1, opacity: 1, duration: 0.48, ease: 'power3.out' }, 4.0);
+
+      tl.to([leftPanel, rightPanel], { y: -230, duration: 0.34, ease: 'power4.in' }, 5.8);
+      tl.to([leftPanel, rightPanel], { opacity: 0, duration: 0.18, ease: 'power1.in' }, 5.94);
+      tl.to(divider, { y: -230, duration: 0.34, ease: 'power4.in' }, 5.8);
+      tl.to(divider, { opacity: 0, duration: 0.18, ease: 'power1.in' }, 5.94);
+      tl.to(
+        header,
+        { x: 0, y: -26, scale: 0.32, opacity: 0.15, duration: 0.34, ease: 'power4.in' },
+        5.8
+      );
+
+      tl.set(payoff, { opacity: 1 }, 6.14);
+      tl.fromTo(
+        payoff,
+        { y: 230 },
+        { y: 0, duration: 0.46, ease: 'power4.out' },
+        6.14
+      );
+      tl.fromTo(
+        payoffKicker,
+        { x: 24, opacity: 0.35 },
+        { x: 0, opacity: 1, duration: 0.46, ease: 'power4.out' },
+        6.14
+      );
+      tl.to(
+        urlMask,
+        {
+          clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+          duration: 0.88,
+          ease: 'power3.out'
+        },
+        6.58
+      );
+      tl.to(payoffRule, { scaleX: 1, duration: 0.78, ease: 'power3.out' }, 6.82);
+
+      tl.to(frameDriver, { t: 9, duration: 9, ease: 'none' }, 0);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines['06-portfolio'] = tl;
+    })();
+  </script>
+</template>
