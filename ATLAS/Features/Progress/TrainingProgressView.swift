@@ -54,11 +54,6 @@ struct TrainingProgressView: View {
                     if section == 1 {
                         BodyMeasurementsView()
                     } else {
-                        AtlasSectionHeader(
-                            title: "Vue d’ensemble",
-                            subtitle: "Vos données ATLAS, calculées sur les séries de travail"
-                        )
-
                         HStack(spacing: 12) {
                             MetricTile(
                                 title: "Séances",
@@ -73,27 +68,20 @@ struct TrainingProgressView: View {
                             )
                         }
 
-                        AtlasSectionHeader(
-                            title: "Records par exercice",
-                            subtitle: "Charge, répétitions et 1RM estimé"
-                        )
+                        AtlasSectionHeader(title: "Records par exercice")
 
                         if exerciseSummaries.isEmpty {
-                            EmptyStateView(
-                                icon: "chart.line.uptrend.xyaxis",
-                                title: "Pas encore de records",
-                                message: "Terminez une séance pour calculer vos premiers repères."
+                            ContentUnavailableView(
+                                "Pas encore de records",
+                                systemImage: "chart.line.uptrend.xyaxis",
+                                description: Text("Terminez une séance pour calculer vos premiers repères.")
                             )
                         } else {
                             ForEach(exerciseSummaries) { summary in
                                 AtlasCard {
                                     VStack(alignment: .leading, spacing: 12) {
-                                        HStack {
-                                            AtlasIconBadge(systemImage: "trophy.fill", tint: AtlasTheme.warning)
-                                            Text(summary.name)
-                                                .font(.headline)
-                                            Spacer()
-                                        }
+                                        Text(summary.name)
+                                            .font(.headline)
                                         HStack {
                                             recordValue("Charge", summary.records.heaviestLoadKilograms, suffix: "kg")
                                             recordValue("1RM estimé", summary.records.estimatedOneRepMaxKilograms, suffix: "kg")

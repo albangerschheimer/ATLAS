@@ -12,10 +12,10 @@ struct ProgramsView: View {
     var body: some View {
         List {
             if programs.isEmpty {
-                EmptyStateView(
-                    icon: "list.bullet.clipboard",
-                    title: "Aucun programme",
-                    message: "Créez une structure qui correspond réellement à votre semaine."
+                ContentUnavailableView(
+                    "Aucun programme",
+                    systemImage: "list.bullet.clipboard",
+                    description: Text("Créez une structure qui correspond réellement à votre semaine.")
                 )
                 .listRowBackground(Color.clear)
             } else {

@@ -20,17 +20,8 @@ struct TrainHomeView: View {
         NavigationStack {
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: AtlasTheme.sectionSpacing) {
-                    VStack(alignment: .leading, spacing: 6) {
-                        Text("ENTRAÎNEMENT")
-                            .font(.caption.bold())
-                            .tracking(2.2)
-                            .foregroundStyle(AtlasTheme.accent)
-                        Text("Construire. Exécuter.\nProgresser.")
-                            .font(.largeTitle.bold())
-                        Text("Votre séance reste simple lorsque l’effort commence.")
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                    }
+                    Text("Séance")
+                        .font(.largeTitle.bold())
 
                     Button {
                         if let draft {
@@ -49,7 +40,7 @@ struct TrainHomeView: View {
                                 Text(draft == nil ? "Commencer une séance libre" : "Reprendre \(draft?.name ?? "la séance")")
                                     .font(.headline)
                                 if let draft {
-                                    Text("\(draft.completedSetCount) séries enregistrées")
+                                    Text(draft.completedSetSummary)
                                         .font(.caption)
                                         .opacity(0.82)
                                 }
@@ -60,11 +51,6 @@ struct TrainHomeView: View {
                     }
                     .buttonStyle(AtlasPrimaryButtonStyle())
                     .accessibilityIdentifier("train.startWorkout")
-
-                    AtlasSectionHeader(
-                        title: "Votre entraînement",
-                        subtitle: "Préparer, personnaliser et retrouver vos performances"
-                    )
 
                     NavigationLink {
                         ExerciseLibraryView()

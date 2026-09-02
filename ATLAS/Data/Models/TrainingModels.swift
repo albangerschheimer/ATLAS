@@ -264,6 +264,17 @@ final class WorkoutRecord {
         exercises.flatMap(\.sets).filter(\.isCompleted).count
     }
 
+    /// Accords singulier/pluriel partagés par les écrans qui comptent des séries.
+    var completedSetCountLabel: String {
+        completedSetCount > 1 ? "\(completedSetCount) séries" : "\(completedSetCount) série"
+    }
+
+    var completedSetSummary: String {
+        completedSetCount > 1
+            ? "\(completedSetCount) séries enregistrées"
+            : "\(completedSetCount) série enregistrée"
+    }
+
     var totalVolume: Double {
         TrainingAnalytics.volume(of: exercises.flatMap { entry in
             entry.sets.map(\.snapshot)

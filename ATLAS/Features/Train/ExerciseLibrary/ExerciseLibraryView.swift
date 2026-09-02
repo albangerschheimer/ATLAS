@@ -71,10 +71,10 @@ struct ExerciseLibraryView: View {
                     .foregroundStyle(.secondary)
             }
             if filteredExercises.isEmpty {
-                EmptyStateView(
-                    icon: "magnifyingglass",
-                    title: "Aucun exercice",
-                    message: "Modifiez la recherche ou créez un exercice personnalisé."
+                ContentUnavailableView(
+                    "Aucun exercice",
+                    systemImage: "magnifyingglass",
+                    description: Text("Modifiez la recherche ou créez un exercice personnalisé.")
                 )
                 .listRowBackground(Color.clear)
             } else {
